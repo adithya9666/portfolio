@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+:root {
+  --background: #08090b;
+  --foreground: #f4f4f6;
+  --surface: #111319;
+  --surface-raised: #171a21;
+  --border: rgba(244, 244, 246, 0.1);
+  --muted: #9a9aa6;
+  --accent: #7c5cff;
+  --accent-foreground: #08090b;
+  --accent-soft: rgba(124, 92, 255, 0.14);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-soft: var(--accent-soft);
+  --font-display: var(--font-space-grotesk);
+  --font-sans: var(--font-inter);
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Featured Projects' cinematic pinned scene is desktop-only "magic" with
+     no accessible equivalent of its own — under reduced motion we swap back
+     to the plain vertical card list (normally mobile-only) at every
+     viewport width instead, so content never depends on the pinned
+     choreography to become visible. Unlayered, so it reliably beats the
+     Tailwind `lg:` utilities on both elements regardless of source order. */
+  .featured-projects-stage {
+    display: none !important;
+  }
+  .featured-projects-fallback {
+    display: block !important;
+  }
+
+  /* Same rationale as Featured Projects, above, applied to the Skills
+     orbit's pinned desktop-only scene. */
+  .skills-stage {
+    display: none !important;
+  }
+  .skills-fallback {
+    display: block !important;
+  }
+}
